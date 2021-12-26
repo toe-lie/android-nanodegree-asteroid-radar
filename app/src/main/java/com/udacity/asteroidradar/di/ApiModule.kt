@@ -13,13 +13,13 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
-import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
@@ -36,20 +36,19 @@ object ApiModule {
   @Singleton
   @Provides
   fun provideOkHttpClient(
-    app: Application,
-    builder: OkHttpClient.Builder,
-    networkStatusInterceptor: NetworkStatusInterceptor,
-    logging: HttpLoggingInterceptor,
-    authenticationInterceptor: AuthenticationInterceptor
+      app: Application,
+      builder: OkHttpClient.Builder,
+      networkStatusInterceptor: NetworkStatusInterceptor,
+      logging: HttpLoggingInterceptor,
+      authenticationInterceptor: AuthenticationInterceptor
   ): OkHttpClient {
     builder.addInterceptor(
-      ChuckerInterceptor.Builder(app)
-        .collector(ChuckerCollector(app))
-        .maxContentLength(250000L)
-        .redactHeaders(emptySet())
-        .alwaysReadResponseBody(false)
-        .build()
-    )
+        ChuckerInterceptor.Builder(app)
+            .collector(ChuckerCollector(app))
+            .maxContentLength(250000L)
+            .redactHeaders(emptySet())
+            .alwaysReadResponseBody(false)
+            .build())
     builder.addInterceptor(networkStatusInterceptor)
     builder.addInterceptor(authenticationInterceptor)
     builder.addInterceptor(logging)
@@ -60,17 +59,31 @@ object ApiModule {
   @Singleton
   fun provideRetrofitBuilder(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit.Builder {
     return Retrofit.Builder()
-      .baseUrl(Constants.BASE_URL)
-      .addConverterFactory(ScalarsConverterFactory.create())
-      .addConverterFactory(MoshiConverterFactory.create(moshi))
-      .addCallAdapterFactory(CoroutineCallAdapterFactory())
-      .client(okHttpClient)
+        .baseUrl(Constants.BASE_URL)
+        .addConverterFactory(ScalarsConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .client(okHttpClient)
   }
 
   @Provides
   @Singleton
   fun provideRetrofit(builder: Retrofit.Builder): Retrofit {
     return builder.build()
+  }
+
+  @Provides
+  @Singleton
+  fun provideMoshi(): Moshi {
+    return Moshi.Builder().build()
+  }
+
+  @Provides
+  @Singleton
+  fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+    val interceptor = HttpLoggingInterceptor()
+    interceptor.level = HttpLoggingInterceptor.Level.BODY
+    return interceptor
   }
 }
 
@@ -80,6 +93,5 @@ object ApiServiceModule {
 
   @Provides
   fun provideAsteroidService(retrofit: Retrofit): AsteroidService =
-    retrofit.create(AsteroidService::class.java)
-
+      retrofit.create(AsteroidService::class.java)
 }

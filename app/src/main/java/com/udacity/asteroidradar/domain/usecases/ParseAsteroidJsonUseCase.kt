@@ -5,9 +5,10 @@ import com.udacity.asteroidradar.domain.models.Asteroid
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-class ParseAsteroidJsonUseCase {
+class ParseAsteroidJsonUseCase @Inject constructor() {
 
     operator fun invoke(jsonResult: JSONObject): List<Asteroid> {
         return parseAsteroidsJsonResult(jsonResult)
