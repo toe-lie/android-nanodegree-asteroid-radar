@@ -43,6 +43,8 @@ constructor(
   }
 
   private fun setDailySchedule() {
+    WorkManager.getInstance(applicationContext).cancelAllWorkByTag(TAG)
+
     val currentDate = Calendar.getInstance()
     val dueDate = Calendar.getInstance()
     // Set Execution around 00:00:00
