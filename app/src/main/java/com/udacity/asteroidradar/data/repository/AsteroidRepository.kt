@@ -20,6 +20,6 @@ class AsteroidRepository @Inject constructor(
     private val asteroidLocalDataSource: AsteroidLocalDataSource
 ) {
     fun getAsteroids(filter: AsteroidFilter) = flow {
-        emitAll(asteroidLocalDataSource.getAsteroids().map { it -> it.map { it.toDomain() } })
+        emitAll(asteroidLocalDataSource.getAsteroids(filter.startDate, filter.endDate).map { it -> it.map { it.toDomain() } })
     }
 }
