@@ -4,7 +4,7 @@ import com.udacity.asteroidradar.data.source.local.AsteroidLocalDataSource
 import com.udacity.asteroidradar.data.source.local.database.model.CacheAsteroid
 import com.udacity.asteroidradar.data.source.remote.AsteroidRemoteDataSource
 import com.udacity.asteroidradar.data.source.remote.api.model.mappers.ApiAsteroidMapper
-import com.udacity.asteroidradar.network.models.ApiAsteroid
+import com.udacity.asteroidradar.data.source.remote.api.model.ApiAsteroid
 import javax.inject.Inject
 
 class RefreshAsteroidsUseCase

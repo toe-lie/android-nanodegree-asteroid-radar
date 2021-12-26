@@ -5,6 +5,7 @@ import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.udacity.asteroidradar.Constants
 import com.udacity.asteroidradar.data.source.remote.api.interceptors.AuthenticationInterceptor
 import com.udacity.asteroidradar.data.source.remote.api.interceptors.NetworkStatusInterceptor
@@ -75,7 +76,9 @@ object ApiModule {
   @Provides
   @Singleton
   fun provideMoshi(): Moshi {
-    return Moshi.Builder().build()
+    return Moshi.Builder()
+        .addLast(KotlinJsonAdapterFactory())
+        .build()
   }
 
   @Provides

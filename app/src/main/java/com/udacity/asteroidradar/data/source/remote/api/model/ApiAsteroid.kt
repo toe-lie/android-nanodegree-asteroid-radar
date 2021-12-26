@@ -1,5 +1,8 @@
-package com.udacity.asteroidradar.network.models
+package com.udacity.asteroidradar.data.source.remote.api.model
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class ApiAsteroid(
     val id: Long,
     val codename: String,

@@ -1,8 +1,7 @@
 package com.udacity.asteroidradar.data.source.remote.api
 
 import com.udacity.asteroidradar.Constants
-import com.udacity.asteroidradar.domain.models.Asteroid
-import com.udacity.asteroidradar.network.models.ApiAsteroid
+import com.udacity.asteroidradar.data.source.remote.api.model.ApiAsteroid
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*

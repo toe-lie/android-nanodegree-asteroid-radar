@@ -23,12 +23,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-<!--            app:imageUrl='@{viewModel.pictureOfDay.imageUrl}'-->
             <ImageView
                 android:id="@+id/activity_main_image_of_the_day"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
+                app:imageUrl='@{viewModel.pictureOfDay.imageUrl}'
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/placeholder_picture_of_day" />
 

@@ -1,10 +1,7 @@
 package com.udacity.asteroidradar.data.source.remote.api.model.mappers
 
-import com.udacity.asteroidradar.data.source.remote.api.model.mappers.ApiMapper
 import com.udacity.asteroidradar.domain.models.Asteroid
-import com.udacity.asteroidradar.domain.models.PictureOfDay
-import com.udacity.asteroidradar.network.models.ApiAsteroid
-import com.udacity.asteroidradar.network.models.ApiPictureOfDay
+import com.udacity.asteroidradar.data.source.remote.api.model.ApiAsteroid
 import javax.inject.Inject
 
 class ApiAsteroidMapper @Inject constructor(): ApiMapper<ApiAsteroid, Asteroid> {

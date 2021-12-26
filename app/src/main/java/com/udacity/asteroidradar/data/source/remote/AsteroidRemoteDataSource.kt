@@ -3,7 +3,7 @@ package com.udacity.asteroidradar.data.source.remote
 import com.udacity.asteroidradar.Constants
 import com.udacity.asteroidradar.data.source.remote.api.parseAsteroidsJsonResult
 import com.udacity.asteroidradar.data.source.remote.api.services.AsteroidService
-import com.udacity.asteroidradar.network.models.ApiAsteroid
+import com.udacity.asteroidradar.data.source.remote.api.model.ApiAsteroid
 import org.json.JSONObject
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter

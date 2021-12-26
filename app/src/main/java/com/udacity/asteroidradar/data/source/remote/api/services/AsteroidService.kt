@@ -1,5 +1,6 @@
 package com.udacity.asteroidradar.data.source.remote.api.services
 
+import com.udacity.asteroidradar.data.source.remote.api.model.ApiPictureOfDay
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -14,5 +15,5 @@ interface AsteroidService {
     ): String
 
     /** Retrieve Astronomy Picture of the Day */
-    // @GET("planetary/apod") suspend fun getPictureOfDay(): ApiPictureOfDay
+     @GET("planetary/apod") suspend fun getPictureOfDay(): ApiPictureOfDay
 }

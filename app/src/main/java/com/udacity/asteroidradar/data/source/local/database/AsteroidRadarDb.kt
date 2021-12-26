@@ -1,7 +1,7 @@
 package com.udacity.asteroidradar.data.source.local.database
 
 import com.udacity.asteroidradar.data.source.local.database.daos.AsteroidDao
-import com.udacity.asteroidradar.database.daos.PictureOfDayDao
+import com.udacity.asteroidradar.data.source.local.database.daos.PictureOfDayDao
 
 
 interface AsteroidRadarDb {

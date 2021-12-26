@@ -3,6 +3,9 @@ package com.udacity.asteroidradar.ui.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.udacity.asteroidradar.data.repository.AsteroidRepository
+import com.udacity.asteroidradar.data.repository.PictureOfDayRepository
+import com.udacity.asteroidradar.data.source.remote.api.model.mappers.ApiPictureOfDayMapper
+import com.udacity.asteroidradar.domain.models.PictureOfDay
 import com.udacity.asteroidradar.ui.model.mappers.UiAsteroidMapper
 import com.udacity.asteroidradar.ui.model.UiAsteroid
 import com.udacity.asteroidradar.ui.model.UiAsteroidFilter
@@ -16,6 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val asteroidRepository: AsteroidRepository,
+    private val pictureOfDayRepository: PictureOfDayRepository,
     private val uiAsteroidMapper: UiAsteroidMapper
 ) : ViewModel() {
 
@@ -23,8 +27,21 @@ class MainViewModel @Inject constructor(
     val asteroids: StateFlow<List<UiAsteroid>>
         get() = _asteroids
 
+    private val _pictureOfDay: MutableStateFlow<PictureOfDay?> = MutableStateFlow(null)
+    val pictureOfDay: StateFlow<PictureOfDay?>
+        get() = _pictureOfDay
+
     init {
+        loadPictureOfDay()
         loadAsteroids()
+    }
+
+    private fun loadPictureOfDay() {
+        viewModelScope.launch {
+            pictureOfDayRepository.getPictureOfDay().collectLatest {
+                _pictureOfDay.value = it
+            }
+        }
     }
 
     private fun loadAsteroids(filter: UiAsteroidFilter = UiAsteroidFilter.Week) {
