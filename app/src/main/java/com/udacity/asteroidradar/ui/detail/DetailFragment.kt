@@ -8,12 +8,16 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.udacity.asteroidradar.R
-import com.udacity.asteroidradar.databinding.FragmentDetailBinding
+import com.udacity.asteroidradar.databinding.DetailFragmentBinding
+import com.udacity.asteroidradar.util.autoCleared
 
 class DetailFragment : Fragment() {
+
+    private var binding by autoCleared<DetailFragmentBinding>()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        val binding = FragmentDetailBinding.inflate(inflater)
+        binding = DetailFragmentBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
         val asteroid = DetailFragmentArgs.fromBundle(arguments!!).selectedAsteroid
