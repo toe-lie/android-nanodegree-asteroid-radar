@@ -4,11 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.udacity.asteroidradar.data.repository.AsteroidRepository
 import com.udacity.asteroidradar.data.repository.PictureOfDayRepository
-import com.udacity.asteroidradar.data.source.remote.api.model.mappers.ApiPictureOfDayMapper
-import com.udacity.asteroidradar.domain.models.PictureOfDay
-import com.udacity.asteroidradar.ui.model.mappers.UiAsteroidMapper
-import com.udacity.asteroidradar.ui.model.UiAsteroid
 import com.udacity.asteroidradar.ui.model.UiAsteroidFilter
+import com.udacity.asteroidradar.ui.model.mappers.UiAsteroidMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
