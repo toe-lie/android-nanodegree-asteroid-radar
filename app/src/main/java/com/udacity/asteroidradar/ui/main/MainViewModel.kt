@@ -13,6 +13,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -35,6 +36,10 @@ class MainViewModel @Inject constructor(
 
     private var _currentFilter = DEFAULT_FILTER
 
+    private val _uiState: MutableStateFlow<AsteroidUiState> = MutableStateFlow(AsteroidUiState())
+    val uiState: StateFlow<AsteroidUiState>
+        get() = _uiState
+
     init {
         loadPictureOfDay()
         loadAsteroids()
@@ -42,16 +47,22 @@ class MainViewModel @Inject constructor(
 
     private fun loadPictureOfDay() {
         viewModelScope.launch {
-            pictureOfDayRepository.getPictureOfDay().collectLatest {
-                _pictureOfDay.value = it
+            pictureOfDayRepository.getPictureOfDay().collectLatest { pictureOfDay ->
+                _pictureOfDay.value = pictureOfDay
+                _uiState.update {
+                    it.copy(pictureOfDay = pictureOfDay)
+                }
             }
         }
     }
 
     private fun loadAsteroids(filter: UiAsteroidFilter = DEFAULT_FILTER) {
         viewModelScope.launch {
-            asteroidRepository.getAsteroids(UiAsteroidFilter.to(filter)).collectLatest { it ->
-                _asteroids.value = it.map { uiAsteroidMapper.mapToView(it) }
+            asteroidRepository.getAsteroids(UiAsteroidFilter.to(filter)).collectLatest { asteroids ->
+                _asteroids.value = asteroids.map { uiAsteroidMapper.mapToView(it) }
+                _uiState.update {
+                    it.copy(asteroidItems = asteroids.map { uiAsteroidMapper.mapToView(it) })
+                }
             }
         }
     }
