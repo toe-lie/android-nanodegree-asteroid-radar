@@ -9,4 +9,14 @@
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="ListItemTitle">
+        <item name="android:textAppearance">?textAppearanceSubtitle1</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ListItemSubtitle">
+        <item name="android:textAppearance">?textAppearanceBody2</item>
+        <item name="android:textColor">@color/material_on_surface_emphasis_medium</item>
+    </style>
+
 </resources>
