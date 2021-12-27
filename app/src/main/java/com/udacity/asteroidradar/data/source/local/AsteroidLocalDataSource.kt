@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class AsteroidLocalDataSource @Inject constructor(private val dao: AsteroidDao) {
 
-  fun getAsteroids(startDate: String, endDate: String) = dao.getAsteroids(startDate, endDate)
+  private fun getAsteroids(startDate: String, endDate: String) = dao.getAsteroids(startDate, endDate)
 
   fun getAsteroids(startDate: LocalDate, endDate: LocalDate): Flow<List<CacheAsteroid>?> {
     val dateFormatter = DateTimeFormatter.ofPattern(Constants.API_QUERY_DATE_FORMAT)
