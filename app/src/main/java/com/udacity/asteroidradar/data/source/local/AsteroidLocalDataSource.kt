@@ -3,10 +3,10 @@ package com.udacity.asteroidradar.data.source.local
 import com.udacity.asteroidradar.Constants
 import com.udacity.asteroidradar.data.source.local.database.daos.AsteroidDao
 import com.udacity.asteroidradar.data.source.local.database.model.CacheAsteroid
+import kotlinx.coroutines.flow.Flow
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
-import kotlinx.coroutines.flow.Flow
 
 class AsteroidLocalDataSource @Inject constructor(private val dao: AsteroidDao) {
 
@@ -21,5 +21,9 @@ class AsteroidLocalDataSource @Inject constructor(private val dao: AsteroidDao) 
 
   suspend fun saveAsteroids(asteroids: List<CacheAsteroid>) {
     dao.insert(asteroids)
+  }
+
+  fun deleteObsoleteAsteroids() {
+    dao.deleteObsoleteAsteroids()
   }
 }

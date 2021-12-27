@@ -20,7 +20,6 @@ constructor(
 ) : CoroutineWorker(context, params) {
   companion object {
     const val TAG = "fetch-asteroids"
-    const val DAILY_FETCH_TAG = "daily-fetch-asteroids"
 
     fun buildConstraints() =
         Constraints.Builder()

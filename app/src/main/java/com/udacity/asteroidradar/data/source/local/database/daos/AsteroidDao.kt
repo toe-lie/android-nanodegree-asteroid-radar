@@ -18,4 +18,7 @@ abstract class AsteroidDao {
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   abstract suspend fun insert(asteroids: List<CacheAsteroid>)
+
+  @Query("DELETE FROM asteroid WHERE date(close_approach_date) < date()")
+  abstract fun deleteObsoleteAsteroids()
 }
