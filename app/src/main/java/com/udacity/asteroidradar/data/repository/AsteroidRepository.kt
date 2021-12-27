@@ -6,9 +6,7 @@ import com.udacity.asteroidradar.data.source.local.PictureOfDayLocalDataSource
 import com.udacity.asteroidradar.domain.models.Asteroid
 import com.udacity.asteroidradar.domain.models.AsteroidFilter
 import com.udacity.asteroidradar.domain.models.PictureOfDay
-import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import org.json.JSONException
 import retrofit2.HttpException
 import java.io.IOException
@@ -20,6 +18,6 @@ class AsteroidRepository @Inject constructor(
     private val asteroidLocalDataSource: AsteroidLocalDataSource
 ) {
     fun getAsteroids(filter: AsteroidFilter) = flow {
-        emitAll(asteroidLocalDataSource.getAsteroids(filter.startDate, filter.endDate).map { it -> it.map { it.toDomain() } })
+        emitAll(asteroidLocalDataSource.getAsteroids(filter.startDate, filter.endDate).map { it -> it?.map { it.toDomain() } })
     }
 }

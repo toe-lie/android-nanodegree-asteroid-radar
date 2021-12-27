@@ -11,7 +11,7 @@ abstract class AsteroidDao {
   abstract fun getAllAsteroids(): Flow<List<CacheAsteroid>>
 
   @Query("SELECT * FROM asteroid WHERE date(close_approach_date) BETWEEN date(:startDate) AND date(:endDate) ORDER BY date(close_approach_date) ASC")
-  abstract fun getAsteroids(startDate: String, endDate: String): Flow<List<CacheAsteroid>>
+  abstract fun getAsteroids(startDate: String, endDate: String): Flow<List<CacheAsteroid>?>
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   abstract suspend fun insert(vararg asteroids: CacheAsteroid)

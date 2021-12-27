@@ -12,7 +12,7 @@ class AsteroidLocalDataSource @Inject constructor(private val dao: AsteroidDao) 
 
   fun getAsteroids(startDate: String, endDate: String) = dao.getAsteroids(startDate, endDate)
 
-  fun getAsteroids(startDate: LocalDate, endDate: LocalDate): Flow<List<CacheAsteroid>> {
+  fun getAsteroids(startDate: LocalDate, endDate: LocalDate): Flow<List<CacheAsteroid>?> {
     val dateFormatter = DateTimeFormatter.ofPattern(Constants.API_QUERY_DATE_FORMAT)
     val startDateString = dateFormatter.format(startDate)
     val endDateString = dateFormatter.format(endDate)
