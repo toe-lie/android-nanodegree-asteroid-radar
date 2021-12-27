@@ -26,14 +26,6 @@ class MainViewModel @Inject constructor(
     private val uiAsteroidMapper: UiAsteroidMapper
 ) : ViewModel() {
 
-    private val _asteroids: MutableStateFlow<List<UiAsteroid>> = MutableStateFlow(emptyList())
-    val asteroids: StateFlow<List<UiAsteroid>>
-        get() = _asteroids
-
-    private val _pictureOfDay: MutableStateFlow<PictureOfDay?> = MutableStateFlow(null)
-    val pictureOfDay: StateFlow<PictureOfDay?>
-        get() = _pictureOfDay
-
     private var _currentFilter = DEFAULT_FILTER
 
     private val _uiState: MutableStateFlow<AsteroidUiState> = MutableStateFlow(AsteroidUiState())
@@ -48,7 +40,6 @@ class MainViewModel @Inject constructor(
     private fun loadPictureOfDay() {
         viewModelScope.launch {
             pictureOfDayRepository.getPictureOfDay().collectLatest { pictureOfDay ->
-                _pictureOfDay.value = pictureOfDay
                 _uiState.update {
                     it.copy(pictureOfDay = pictureOfDay)
                 }
@@ -59,7 +50,6 @@ class MainViewModel @Inject constructor(
     private fun loadAsteroids(filter: UiAsteroidFilter = DEFAULT_FILTER) {
         viewModelScope.launch {
             asteroidRepository.getAsteroids(UiAsteroidFilter.to(filter)).collectLatest { asteroids ->
-                _asteroids.value = asteroids.map { uiAsteroidMapper.mapToView(it) }
                 _uiState.update {
                     it.copy(asteroidItems = asteroids.map { uiAsteroidMapper.mapToView(it) })
                 }
