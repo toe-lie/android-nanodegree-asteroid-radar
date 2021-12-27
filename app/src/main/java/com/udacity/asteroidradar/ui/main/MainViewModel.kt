@@ -46,7 +46,7 @@ class MainViewModel @Inject constructor(
     private fun loadAsteroids() {
         viewModelScope.launch {
             asteroidRepository.getAsteroids(UiAsteroidFilter.to(uiState.value.currentFilter)).collectLatest { asteroids ->
-                _uiState.update {
+                _uiState.update { it ->
                     it.copy(asteroidItems = asteroids.map { uiAsteroidMapper.mapToView(it) })
                 }
             }
