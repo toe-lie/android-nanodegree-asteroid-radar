@@ -17,16 +17,12 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private val DEFAULT_FILTER = UiAsteroidFilter.Week
-
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val asteroidRepository: AsteroidRepository,
     private val pictureOfDayRepository: PictureOfDayRepository,
     private val uiAsteroidMapper: UiAsteroidMapper
 ) : ViewModel() {
-
-    private var _currentFilter = DEFAULT_FILTER
 
     private val _uiState: MutableStateFlow<AsteroidUiState> = MutableStateFlow(AsteroidUiState())
     val uiState: StateFlow<AsteroidUiState>
@@ -47,9 +43,9 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    private fun loadAsteroids(filter: UiAsteroidFilter = DEFAULT_FILTER) {
+    private fun loadAsteroids() {
         viewModelScope.launch {
-            asteroidRepository.getAsteroids(UiAsteroidFilter.to(filter)).collectLatest { asteroids ->
+            asteroidRepository.getAsteroids(UiAsteroidFilter.to(uiState.value.currentFilter)).collectLatest { asteroids ->
                 _uiState.update {
                     it.copy(asteroidItems = asteroids.map { uiAsteroidMapper.mapToView(it) })
                 }
@@ -58,10 +54,12 @@ class MainViewModel @Inject constructor(
     }
 
     fun updateFilter(filter: UiAsteroidFilter) {
-        if (filter == _currentFilter) return
+        if (uiState.value.currentFilter == filter) return
 
-        _currentFilter = filter
-        loadAsteroids(filter)
+        _uiState.update {
+            it.copy(currentFilter = filter)
+        }
+        loadAsteroids()
     }
 
 }
