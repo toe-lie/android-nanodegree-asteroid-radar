@@ -51,7 +51,7 @@
             android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/not_hazardous_asteroid_image"
+            android:contentDescription="@{item.potentiallyHazardous ? @string/potentially_hazardous_asteroid_image : @string/not_hazardous_asteroid_image}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/end_guideline"
             app:layout_constraintTop_toTopOf="parent"
@@ -61,12 +61,14 @@
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/start_guideline"
             android:layout_width="wrap_content"
+            android:importantForAccessibility="no"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="@dimen/spacing_normal" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/end_guideline"
+            android:importantForAccessibility="no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"

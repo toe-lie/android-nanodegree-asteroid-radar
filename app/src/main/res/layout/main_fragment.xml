@@ -28,7 +28,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
+                android:accessibilityLiveRegion="polite"
                 android:scaleType="centerCrop"
+                android:contentDescription="@{@string/nasa_picture_of_day_content_description_format(viewModel.uiState.pictureOfDay.title ?? @string/content_description_empty_state_placeholder)}"
                 app:imageUrl='@{viewModel.uiState.pictureOfDay.imageUrl}'
                 app:srcCompat="@drawable/placeholder_picture_of_day" />
 
