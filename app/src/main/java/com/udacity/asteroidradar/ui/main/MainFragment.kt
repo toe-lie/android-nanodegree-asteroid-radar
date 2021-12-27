@@ -74,9 +74,7 @@ class MainFragment : Fragment() {
         return true
       }
       R.id.action_filter_saved -> {
-        // TODO: extract string resource
-        // Note to mentor: I can't find any requirement related with saved asteroids filter
-        Toast.makeText(requireContext(), "Coming soon ...", Toast.LENGTH_SHORT).show()
+        viewModel.updateFilter(UiAsteroidFilter.Saved)
         return true
       }
     }

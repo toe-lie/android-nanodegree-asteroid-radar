@@ -18,6 +18,12 @@ class AsteroidRepository @Inject constructor(
     private val asteroidLocalDataSource: AsteroidLocalDataSource
 ) {
     fun getAsteroids(filter: AsteroidFilter) = flow {
-        emitAll(asteroidLocalDataSource.getAsteroids(filter.startDate, filter.endDate).map { it -> it?.map { it.toDomain() } })
+        val cachedAsteroidsFlow = if (filter == AsteroidFilter.Saved) {
+            asteroidLocalDataSource.getAllAsteroids()
+        } else {
+            asteroidLocalDataSource.getAsteroids(filter.startDate, filter.endDate)
+        }
+
+        emitAll(cachedAsteroidsFlow.map { it -> it?.map { it.toDomain() } })
     }
 }

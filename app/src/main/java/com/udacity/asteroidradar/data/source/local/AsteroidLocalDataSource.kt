@@ -19,6 +19,8 @@ class AsteroidLocalDataSource @Inject constructor(private val dao: AsteroidDao) 
     return getAsteroids(startDateString, endDateString)
   }
 
+  fun getAllAsteroids() = dao.getAllAsteroids()
+
   suspend fun saveAsteroids(asteroids: List<CacheAsteroid>) {
     dao.insert(asteroids)
   }
