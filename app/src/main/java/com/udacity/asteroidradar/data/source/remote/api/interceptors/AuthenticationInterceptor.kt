@@ -12,7 +12,7 @@ class AuthenticationInterceptor @Inject constructor(): Interceptor {
         val url =
             originalHttpUrl
                 .newBuilder()
-                .addQueryParameter("api_key", "MWgdh6GtcZBOR4R1cOEd1SNsuzYDuQ6zjNFfk7cz")
+                .addQueryParameter("api_key", "DEMO_KEY")
                 .build()
 
         val request = original.newBuilder().url(url).build()
