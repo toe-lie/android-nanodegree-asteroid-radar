@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Dev/workspace/PROJECTS/nanodegree/PROJECTS/AsteroidRadar/app/src/main/res/drawable/placeholder_picture_of_day.xml" value="0.20416666666666666" />
         <entry key="..\:/Dev/workspace/PROJECTS/nanodegree/PROJECTS/AsteroidRadar/app/src/main/res/layout/activity_main.xml" value="0.1953125" />
         <entry key="..\:/Dev/workspace/PROJECTS/nanodegree/PROJECTS/AsteroidRadar/app/src/main/res/layout/asteroid_list_item.xml" value="0.1953125" />
         <entry key="..\:/Dev/workspace/PROJECTS/nanodegree/PROJECTS/AsteroidRadar/app/src/main/res/layout/detail_fragment.xml" value="0.20260416666666667" />

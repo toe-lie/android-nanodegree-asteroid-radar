@@ -1,6 +1,7 @@
 package com.udacity.asteroidradar
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import com.udacity.asteroidradar.appinitializers.AppInitializers
@@ -17,6 +18,8 @@ class AsteroidRadarApp : Application(), Configuration.Provider {
   override fun onCreate() {
     super.onCreate()
     initializers.init(this)
+
+    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
   }
 
   override fun getWorkManagerConfiguration() =

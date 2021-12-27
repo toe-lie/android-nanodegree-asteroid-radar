@@ -28,7 +28,5 @@ object TasksModule {
 @Module
 abstract class TasksModuleBinds {
 
-  @Binds @IntoSet abstract fun provideTasksInitializer(bind: TasksInitializer): AppInitializer
-
   @Binds @Singleton abstract fun provideTasks(bind: AsteroidTasksImpl): AsteroidTasks
 }
